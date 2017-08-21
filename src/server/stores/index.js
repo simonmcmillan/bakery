@@ -1,1 +1,0 @@
-export mongo from './mongo';

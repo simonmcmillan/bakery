@@ -5,13 +5,13 @@ const conf = convict({
 		doc: 'The port to bind.',
 		format: 'port',
 		default: 3000,
-		env: 'PORT'
+		env: 'PORT',
 	},
 	env: {
 		doc: 'The applicaton environment.',
 		format: ['production', 'development', 'test'],
 		default: 'development',
-		env: 'NODE_ENV'
+		env: 'NODE_ENV',
 	},
 });
 

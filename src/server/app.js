@@ -4,8 +4,8 @@ import Order from './models/order';
 
 const app = express();
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
+app.get('/', (req, res) => {
+	res.send('Hello World!');
 });
 
 app.post('/bakery',
@@ -13,7 +13,10 @@ app.post('/bakery',
 	(req, res) => {
 		if (req.body.length > 0) {
 			const order = new Order();
-			res.json(order.handleOrder(req.body));
+
+			const orders = order.handleOrder(req.body);
+
+			res.json(orders);
 		}
 		else {
 			res.status(400).send('Please provide a valid order!');
