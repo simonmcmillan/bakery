@@ -9,7 +9,7 @@ To run:
 
 3. in postman or curl or something:
 
-POST body with type 'application/json' the following :
+POST body to `http://localhost:3000/bakery/` with type 'application/json' the following :
 
 ```
 [
