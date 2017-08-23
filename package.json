@@ -13,8 +13,8 @@
   "scripts": {
     "start": "NODE_ENV=development nodemon --watch src/server",
     "start:debug": "NODE_ENV=development nodemon --watch src/server --inspect",
-	"test": "NODE_ENV=test mocha --compilers js:babel-core/register \"./src/**/*.spec.js\"",
-	"test-watch": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register \\\"./src/**/*.spec.js\\\" --reporter spec\" --watch src --watch test"
+    "test": "NODE_ENV=test mocha --compilers js:babel-core/register \"./src/**/*.spec.js\"",
+    "test-watch": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register \\\"./src/**/*.spec.js\\\" --reporter spec\" --watch src --watch test"
   },
   "author": "Simon McMillan",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "body-parser": "^1.17.2",
     "convict": "^1.4.0",
     "express": "^4.14.0",
+    "lodash": "^4.17.4",
     "mongodb": "^2.2.9",
     "mongoose": "^4.6.0",
     "start-server-webpack-plugin": "^2.2.0",

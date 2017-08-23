@@ -1,6 +1,5 @@
 import { assert, expect } from 'chai';
 import Order from './order';
-import products from './products';
 
 describe('bakery/order spec', () => {
 	describe('calculate packs', () => {
@@ -62,10 +61,6 @@ describe('bakery/order spec', () => {
 
 		for (let i = 0; i < 3; i++) {
 			it('Throw exception on invalid arrays', () => {
-				// const minPacks = order.calculateMinPacks(availablePacks[i], inValidPayload[i].amount);
-				// console.log(minPacks);
-				// console.log(validPacksResult[0]);
-
 				assert.throws(function() {
 					order.calculateMinPacks(availablePacks[i], inValidPayload[i].amount)
 				},

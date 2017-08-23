@@ -1,29 +1,73 @@
+import countBy from 'lodash/countBy';
+import orderError from '../error/order-error';
 import products from './products';
 
 export default class Order {
 
 	handleOrder (order) {
 		let minPacks;
-		try {
+
+		if (this.validate(order)) {
 			return order.reduce((acc, item) => {
-				if (!item.id && item.amount) {
-					throw new Error('order requires id and amount');
-				}
 				minPacks = this.calculateMinPacks(this.getPackAmounts(products[item.id]), item.amount);
 				//put the ID back in the array
 				minPacks = [{
 					[item.id]: {
 						totalPrice: this.handlePrices(minPacks, products[item.id].packs),
-						packs: minPacks,
+						packs: this.formatPacks(minPacks, products[item.id].packs),
 					},
 				}];
 				acc.push(minPacks);
 				return acc;
 			}, []);
 		}
-		catch (err) {
-			console.error(err);
+	}
+
+	validate (order) {
+		let errors = [];
+
+		order.forEach((item, i) => {
+			const orderErrors = {};
+
+			if (!item.id) {
+				orderErrors.id = 'Order requires id';
+				errors[i] = orderErrors;
+			}
+			if (item.id && !products[item.id]) {
+				orderErrors.id = `Invalid product id ${item.id}`;
+				errors[i] = orderErrors;
+			}
+			if (!item.amount) {
+				orderErrors.amount = 'Order amount is required';
+				errors[i] = orderErrors;
+			}
+			if (item.amount && !Number.isInteger(item.amount)) {
+				orderErrors.amount = 'Order amount needs to be an integer';
+				errors[i] = orderErrors;
+			}
+		});
+
+		if (errors.length) {
+			throw new orderError({ errors }, 400);
 		}
+
+		return true;
+	}
+
+	formatPacks (packs, dbPacks) {
+		const counted = countBy(packs);
+
+		let formatted = [];
+
+		Object.keys(counted).forEach((key) => {
+			const cost = this.getPackCost(parseInt(key), dbPacks);
+			const totalCost = cost * counted[key];
+			const costToDollars =  this.intToDollars(totalCost);
+
+			formatted.push(`${counted[key]} x ${key} = ${costToDollars}`);
+		});
+
+		return formatted;
 	}
 
 	getPackAmounts (product) {
@@ -39,7 +83,9 @@ export default class Order {
 		}
 		//we cant find the correct packs to add together
 		if (packs.length === 0) {
-			throw new Error('Invalid order amount');
+			const err = new Error('Invalid order amount');
+			err.status = 400;
+			throw err;
 		}
 		//unshift the first element off the packs array
 		packs.shift();
@@ -83,13 +129,21 @@ export default class Order {
 		}, 0);
 	}
 
-	handlePrices (orderPacks, dbPacks) {
-		const price = orderPacks.reduce((acc, amount) => {
-			const packCost = dbPacks.find((dbPack) => dbPack.amount === amount);
-			return packCost.cost + acc;
-		}, 0);
+	getPackCost (amount, dbPacks) {
+		const packCost = dbPacks.find((dbPack) => dbPack.amount === amount);
+		return packCost.cost;
+	}
 
+	intToDollars (price) {
 		const priceInDollars = price / 100;
 		return priceInDollars.toLocaleString('en-AU', { style: 'currency', currency: 'USD' });
+	}
+
+	handlePrices (orderPacks, dbPacks) {
+		const price = orderPacks.reduce((acc, amount) => {
+			const packCost = this.getPackCost(amount, dbPacks);
+			return packCost + acc;
+		}, 0);
+		return this.intToDollars(price);
 	}
 }
