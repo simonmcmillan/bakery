@@ -1,5 +1,5 @@
 export default function bakeryError (message, code) {
-	const err = new Error('There was an error');
+	const err = new Error(message);
 	err.errors = message;
 	err.status = code;
 

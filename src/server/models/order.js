@@ -83,9 +83,7 @@ export default class Order {
 		}
 		//we cant find the correct packs to add together
 		if (packs.length === 0) {
-			const err = new Error('Invalid order amount');
-			err.status = 400;
-			throw err;
+			throw new orderError('Invalid order amount', 400);
 		}
 		//unshift the first element off the packs array
 		packs.shift();
