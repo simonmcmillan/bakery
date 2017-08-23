@@ -30,9 +30,9 @@ POST body to `http://localhost:3000/bakery/` with type 'application/json' the fo
 ]
 ```
 
-To test:
+To run tests:
 
-1. yarn run test
+`yarn run test`
 
 
 *NB*

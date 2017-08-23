@@ -8,7 +8,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ONEOKI/http-server.git"
+    "url": "git@github.com:simonmcmillan/bakery.git"
   },
   "scripts": {
     "start": "NODE_ENV=development nodemon --watch src/server",
