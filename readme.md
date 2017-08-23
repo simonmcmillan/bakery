@@ -7,7 +7,9 @@ To run:
 
 2. yarn run start
 
-3. in postman or curl or something:
+3. Make sure you have node installed, any version after 6 should do.
+
+4. in postman or curl or something:
 
 POST body to `http://localhost:3000/bakery/` with type 'application/json' the following :
 
@@ -34,8 +36,7 @@ To test:
 
 
 *NB*
-- Error checking needs to be better.
-
-- Exceptions need to be caught and correct response sent to client
 
 - algorithm is brute force, probably should be smarter!
+
+- There should be more tests
