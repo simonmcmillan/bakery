@@ -34,7 +34,7 @@
     "mongoose": "^4.6.0",
     "start-server-webpack-plugin": "^2.2.0",
     "webpack-node-externals": "^1.6.0",
-    "yarn": "0.27.5"
+    "yarn": "1.17.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
