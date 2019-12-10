@@ -29,7 +29,7 @@
     "body-parser": "^1.17.2",
     "convict": "^1.4.0",
     "express": "^4.14.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "mongodb": "^2.2.9",
     "mongoose": "^4.6.0",
     "start-server-webpack-plugin": "^2.2.0",
