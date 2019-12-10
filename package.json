@@ -31,7 +31,7 @@
     "express": "^4.14.0",
     "lodash": "^4.17.13",
     "mongodb": "^2.2.9",
-    "mongoose": "^5.7.5",
+    "mongoose": "^5.8.0",
     "start-server-webpack-plugin": "^2.2.0",
     "webpack-node-externals": "^1.6.0",
     "yarn": "1.17.3"
