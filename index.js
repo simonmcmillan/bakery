@@ -4,6 +4,8 @@ if (env === 'development' || env === 'test') {
 	require('babel-register');
 }
 
+
+
 const createServer = require('./src/server/index.js').default;
 const server = createServer();
 
